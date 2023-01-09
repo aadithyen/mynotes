@@ -32,13 +32,13 @@ const config = {
 			900: "#2F0804",
 		},
 	},
-	styles: {
-		global: {
-			body: {
-				bg: mode("#11151c", "#fafafa"),
-			},
-		},
-	},
+	// styles: {
+	// 	global: {
+	// 		body: {
+	// 			bg: mode("#11151c", "#fafafa"),
+	// 		},
+	// 	},
+	// },
 
 	components: {
 		Heading: {
@@ -52,7 +52,7 @@ const config = {
 			},
 		},
 	},
-	initialColorMode: "dark",
+	initialColorMode: "light",
 	useSystemColorMode: false,
 };
 

@@ -2,28 +2,32 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import thisTheme from "./theme";
-import App from "./App";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import Login from "./pages/Login";
 import "@fontsource/space-grotesk";
-import {
-	createBrowserRouter,
-	RouterProvider,
-	Route,
-	Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
+import { AuthContextProvider } from "./AuthContext";
+import Protected from "./components/Protected";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Home />,
+		element: (
+			<Protected>
+				<Home />
+			</Protected>
+		),
 	},
 	{
 		path: "edit",
-		element: <Edit />,
+		element: (
+			<Protected>
+				<Edit />
+			</Protected>
+		),
 	},
 	{
 		path: "login",
@@ -35,7 +39,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<ChakraProvider theme={thisTheme}>
 			<ColorModeScript initialColorMode={thisTheme.config.initialColorMode} />
-			<RouterProvider router={router} />
+			<AuthContextProvider>
+				<RouterProvider router={router} />
+			</AuthContextProvider>
 		</ChakraProvider>
 	</React.StrictMode>
 );
