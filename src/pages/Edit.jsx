@@ -1,4 +1,4 @@
-import { Box, Flex, IconButton, Textarea } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Textarea, useToast } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdAddPhotoAlternate, MdArrowBack, MdDelete } from "react-icons/md";
@@ -17,6 +17,7 @@ import {
 import { db } from "../firebase";
 
 const Edit = () => {
+	const toast = useToast();
 	const nav = useNavigate();
 	const { user } = UserAuth();
 	const location = useLocation();
@@ -25,18 +26,33 @@ const Edit = () => {
 
 	const updateNote = async () => {
 		const docRef = doc(db, "book", user.uid);
-		if (!location.state?.scratch) {
+		if (titleRef.current.value == "") {
+			toast({
+				title: "Your note needs a title",
+				status: "warning",
+				duration: 3000,
+				isClosable: true,
+			});
+		} else {
+			if (!location.state?.scratch) {
+				await updateDoc(docRef, {
+					notes: arrayRemove(data),
+				});
+			}
 			await updateDoc(docRef, {
-				notes: arrayRemove(data),
+				notes: arrayUnion({
+					title: titleRef.current.value,
+					body: bodyRef.current.value,
+					image: "",
+				}),
+			});
+			toast({
+				title: "Note saved",
+				status: "success",
+				duration: 3000,
+				isClosable: true,
 			});
 		}
-		await updateDoc(docRef, {
-			notes: arrayUnion({
-				title: titleRef.current.value,
-				body: bodyRef.current.value,
-				image: "",
-			}),
-		});
 	};
 
 	const deleteNote = async () => {
@@ -44,6 +60,12 @@ const Edit = () => {
 		if (!location.state?.scratch) {
 			await updateDoc(docRef, {
 				notes: arrayRemove(data),
+			});
+			toast({
+				title: "Sent to trash",
+				status: "success",
+				duration: 3000,
+				isClosable: true,
 			});
 		}
 		nav("/");
