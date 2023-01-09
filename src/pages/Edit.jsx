@@ -27,8 +27,8 @@ const Edit = () => {
 					mt="12"
 					minH="140px"
 				>
-					<EditablePreview />
-					<EditableTextarea overflow="hidden" resize="none" rows="2" />
+					<EditablePreview px="4" />
+					<EditableTextarea overflow="hidden" resize="none" rows="2" px="4" />
 				</Editable>
 
 				<Textarea
