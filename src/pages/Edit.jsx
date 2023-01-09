@@ -1,19 +1,24 @@
-import {
-	Box,
-	Flex,
-	IconButton,
-	Editable,
-	EditableInput,
-	EditableTextarea,
-	EditablePreview,
-	Textarea,
-} from "@chakra-ui/react";
+import { Box, Flex, IconButton, Textarea } from "@chakra-ui/react";
+import { useRef } from "react";
 import { FaSave } from "react-icons/fa";
-import { MdArrowBack, MdDelete } from "react-icons/md";
+import { MdAddPhotoAlternate, MdArrowBack, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import FAB from "../components/FAB";
 
 const Edit = () => {
+	const hiddenFileInput = useRef(null);
+
+	const handleAttach = (event) => {
+		hiddenFileInput.current.click();
+	};
+
+	const handleChange = (event) => {
+		const fileUploaded = event.target.files[0];
+		handleUpload(fileUploaded);
+	};
+
+	const handleUpload = (file) => {};
+
 	return (
 		<Box maxW="1000px" my="4" mx="auto" px="4" mt="8">
 			<Flex flexDir="column">
@@ -21,24 +26,36 @@ const Edit = () => {
 					<Link to="/">
 						<IconButton icon={<MdArrowBack />}></IconButton>
 					</Link>
-					<IconButton icon={<MdDelete />}></IconButton>
+					<Flex gap="10px">
+						<IconButton
+							icon={<MdAddPhotoAlternate />}
+							onClick={handleAttach}
+						></IconButton>
+						<IconButton icon={<MdDelete />}></IconButton>
+					</Flex>
 				</Flex>
-				<Editable
-					defaultValue="the title of the note"
+				<input
+					type="file"
+					ref={hiddenFileInput}
+					onChange={handleChange}
+					hidden
+				/>
+				<Textarea
+					placeholder="Title"
 					fontSize="4xl"
-					as="h2"
 					mt="12"
-					minH="140px"
-				>
-					<EditablePreview px="4" />
-					<EditableTextarea overflow="hidden" resize="none" rows="2" px="4" />
-				</Editable>
+					mb="12"
+					border="none"
+					resize="none"
+					focusBorderColor="primary.200"
+				></Textarea>
 
 				<Textarea
 					minH="xl"
 					placeholder="Write here"
 					border="none"
 					resize="none"
+					focusBorderColor="primary.200"
 				></Textarea>
 
 				<FAB icon={<FaSave />} />
