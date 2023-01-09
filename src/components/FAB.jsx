@@ -1,6 +1,6 @@
 import { Box, IconButton } from "@chakra-ui/react";
 
-const FAB = ({ icon }) => {
+const FAB = ({ icon, action }) => {
 	return (
 		<Box pos="fixed" bottom="3em" right="3em">
 			<IconButton

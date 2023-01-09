@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FaSave } from "react-icons/fa";
 import { MdArrowBack, MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import FAB from "../components/FAB";
 
 const Edit = () => {
@@ -17,7 +18,9 @@ const Edit = () => {
 		<Box maxW="1000px" my="4" mx="auto" px="4" mt="8">
 			<Flex flexDir="column">
 				<Flex flexDir="row" justifyContent="space-between">
-					<IconButton icon={<MdArrowBack />}></IconButton>
+					<Link to="/">
+						<IconButton icon={<MdArrowBack />}></IconButton>
+					</Link>
 					<IconButton icon={<MdDelete />}></IconButton>
 				</Flex>
 				<Editable
