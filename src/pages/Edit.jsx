@@ -41,12 +41,12 @@ const Edit = () => {
 
 	const deleteNote = async () => {
 		const docRef = doc(db, "book", user.uid);
-		nav("/");
 		if (!location.state?.scratch) {
 			await updateDoc(docRef, {
 				notes: arrayRemove(data),
 			});
 		}
+		nav("/");
 	};
 
 	const data = !location.state?.scratch
