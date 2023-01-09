@@ -1,4 +1,5 @@
-import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 
 const config = {
 	fonts: {
@@ -34,7 +35,7 @@ const config = {
 	styles: {
 		global: {
 			body: {
-				bg: "#11151c",
+				bg: mode("#11151c", "#fafafa"),
 			},
 		},
 	},
@@ -51,7 +52,7 @@ const config = {
 			},
 		},
 	},
-	initialColorMode: "dark", // 'dark' | 'light'
+	initialColorMode: "dark",
 	useSystemColorMode: false,
 };
 
