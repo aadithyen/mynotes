@@ -38,6 +38,7 @@ const Edit = () => {
 					type="file"
 					ref={hiddenFileInput}
 					onChange={handleChange}
+					accept="image/*"
 					hidden
 				/>
 				<Textarea
