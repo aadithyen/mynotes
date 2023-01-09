@@ -7,7 +7,7 @@ import NotesList from "../components/NotesList";
 import { db } from "../firebase";
 import { UserAuth } from "../AuthContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const getNotes = async (uid) => {
 	const docRef = doc(db, "book", uid);
@@ -21,8 +21,10 @@ const getNotes = async (uid) => {
 };
 
 const Home = () => {
+	const [search, setSearch] = useState("");
 	const { user } = UserAuth();
 	const [notes, setNotes] = useState([]);
+
 	useEffect(() => {
 		getNotes(user.uid).then((notes) =>
 			setNotes(
@@ -33,10 +35,14 @@ const Home = () => {
 		);
 	}, []);
 
+	const handleSearchChange = (event) => {
+		setSearch(event.target.value);
+	};
+
 	return (
 		<Box maxW="1000px" mx="auto" px="2">
-			<Header />
-			<NotesList notes={notes} />
+			<Header searchHandler={handleSearchChange} />
+			<NotesList notes={notes} searchTerm={search} />
 			<Link to="/edit" state={{ scratch: true }}>
 				<FAB icon={<MdAdd />} />
 			</Link>

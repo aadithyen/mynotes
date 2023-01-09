@@ -18,7 +18,7 @@ import { useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { UserAuth } from "../AuthContext";
 
-const Header = () => {
+const Header = ({ searchHandler }) => {
 	const { user } = UserAuth();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const cancelRef = useRef();
@@ -71,6 +71,7 @@ const Header = () => {
 				<Input
 					placeholder="search"
 					colorScheme="primary"
+					onChange={searchHandler}
 					focusBorderColor="primary.200"
 				></Input>
 			</InputGroup>
