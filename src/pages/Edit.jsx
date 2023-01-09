@@ -1,11 +1,64 @@
 import { Box, Flex, IconButton, Textarea } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdAddPhotoAlternate, MdArrowBack, MdDelete } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import FAB from "../components/FAB";
+import { UserAuth } from "../AuthContext";
+import { useLocation } from "react-router-dom";
+
+import {
+	arrayRemove,
+	arrayUnion,
+	doc,
+	getDoc,
+	updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 const Edit = () => {
+	const nav = useNavigate();
+	const { user } = UserAuth();
+	const location = useLocation();
+	const titleRef = useRef();
+	const bodyRef = useRef();
+
+	const updateNote = async () => {
+		const docRef = doc(db, "book", user.uid);
+		if (!location.state?.scratch) {
+			await updateDoc(docRef, {
+				notes: arrayRemove(data),
+			});
+		}
+		await updateDoc(docRef, {
+			notes: arrayUnion({
+				title: titleRef.current.value,
+				body: bodyRef.current.value,
+				image: "",
+			}),
+		});
+	};
+
+	const deleteNote = async () => {
+		const docRef = doc(db, "book", user.uid);
+		nav("/");
+		if (!location.state?.scratch) {
+			await updateDoc(docRef, {
+				notes: arrayRemove(data),
+			});
+		}
+	};
+
+	const data = !location.state?.scratch
+		? location.state?.data
+		: {
+				title: "",
+				body: "",
+				image: "",
+		  };
+
+	useEffect(() => {}, []);
+
 	const hiddenFileInput = useRef(null);
 
 	const handleAttach = (event) => {
@@ -31,7 +84,7 @@ const Edit = () => {
 							icon={<MdAddPhotoAlternate />}
 							onClick={handleAttach}
 						></IconButton>
-						<IconButton icon={<MdDelete />}></IconButton>
+						<IconButton icon={<MdDelete />} onClick={deleteNote}></IconButton>
 					</Flex>
 				</Flex>
 				<input
@@ -48,7 +101,9 @@ const Edit = () => {
 					mb="12"
 					border="none"
 					resize="none"
+					ref={titleRef}
 					focusBorderColor="primary.200"
+					defaultValue={data.title}
 				></Textarea>
 
 				<Textarea
@@ -56,10 +111,12 @@ const Edit = () => {
 					placeholder="Write here"
 					border="none"
 					resize="none"
+					ref={bodyRef}
 					focusBorderColor="primary.200"
+					defaultValue={data.body}
 				></Textarea>
 
-				<FAB icon={<FaSave />} />
+				<FAB icon={<FaSave />} action={updateNote} />
 			</Flex>
 		</Box>
 	);

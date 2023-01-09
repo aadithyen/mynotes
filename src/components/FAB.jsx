@@ -11,6 +11,7 @@ const FAB = ({ icon, action }) => {
 				boxShadow="xl"
 				colorScheme="primary"
 				icon={icon}
+				onClick={action}
 			/>
 		</Box>
 	);

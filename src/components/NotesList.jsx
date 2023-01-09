@@ -1,20 +1,16 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import NoteCard from "./NoteCard";
 
-const NotesList = () => {
+const NotesList = ({ notes }) => {
 	return (
-		<Box
-			padding={4}
-			w="100%"
-			maxW="1000px"
-			mx="auto"
-			sx={{ columnCount: [1, 2] }}
-		>
-			<NoteCard heading="unnecessarily long heading for pleasure" />
-			<NoteCard heading="longer text" />
-			<NoteCard heading="short" />
-			<NoteCard heading="unnecessarily long heading" />
-		</Box>
+		<Flex flexDir="column" px="4" gap="2px">
+			{notes.map((note, index) => (
+				<Link to="/edit" state={{ data: note, id: index }} key={index}>
+					<NoteCard heading={note.title} body={note.body} key={index} />
+				</Link>
+			))}
+		</Flex>
 	);
 };
 
