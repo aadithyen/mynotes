@@ -11,6 +11,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { AuthContextProvider } from "./AuthContext";
 import Protected from "./components/Protected";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
 	{
@@ -39,7 +42,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<ColorModeScript initialColorMode={thisTheme.config.initialColorMode} />
 		<ChakraProvider theme={thisTheme}>
 			<AuthContextProvider>
-				<RouterProvider router={router} />
+				<QueryClientProvider client={queryClient}>
+					<RouterProvider router={router} />
+				</QueryClientProvider>
 			</AuthContextProvider>
 		</ChakraProvider>
 	</React.StrictMode>
