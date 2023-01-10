@@ -34,11 +34,10 @@ const router = createBrowserRouter([
 		element: <Login />,
 	},
 ]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
+		<ColorModeScript initialColorMode={thisTheme.config.initialColorMode} />
 		<ChakraProvider theme={thisTheme}>
-			<ColorModeScript initialColorMode={thisTheme.config.initialColorMode} />
 			<AuthContextProvider>
 				<RouterProvider router={router} />
 			</AuthContextProvider>
