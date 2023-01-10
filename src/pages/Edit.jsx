@@ -53,6 +53,7 @@ const Edit = () => {
 				isClosable: true,
 			});
 		}
+		nav("/");
 	};
 
 	const deleteNote = async () => {
@@ -78,8 +79,6 @@ const Edit = () => {
 				body: "",
 				image: "",
 		  };
-
-	useEffect(() => {}, []);
 
 	const hiddenFileInput = useRef(null);
 
@@ -124,7 +123,6 @@ const Edit = () => {
 					border="none"
 					resize="none"
 					ref={titleRef}
-					focusBorderColor="primary.200"
 					defaultValue={data.title}
 				></Textarea>
 
@@ -134,7 +132,6 @@ const Edit = () => {
 					border="none"
 					resize="none"
 					ref={bodyRef}
-					focusBorderColor="primary.200"
 					defaultValue={data.body}
 				></Textarea>
 

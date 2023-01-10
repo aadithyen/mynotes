@@ -60,6 +60,7 @@ const Header = ({ searchHandler }) => {
 					</AlertDialogContent>
 				</AlertDialogOverlay>
 			</AlertDialog>
+
 			<Flex justifyContent="space-between" alignItems="center">
 				<Heading as="h1" size="2xl">
 					my notes
@@ -68,12 +69,7 @@ const Header = ({ searchHandler }) => {
 			</Flex>
 			<InputGroup mt="8">
 				<InputLeftElement pointerEvents="none" children={<MdSearch />} />
-				<Input
-					placeholder="search"
-					colorScheme="primary"
-					onChange={searchHandler}
-					focusBorderColor="primary.200"
-				></Input>
+				<Input placeholder="search" onChange={searchHandler}></Input>
 			</InputGroup>
 		</Flex>
 	);

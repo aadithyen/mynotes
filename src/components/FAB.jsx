@@ -8,8 +8,6 @@ const FAB = ({ icon, action }) => {
 				height="60px"
 				width="60px"
 				fontSize="25px"
-				boxShadow="xl"
-				colorScheme="primary"
 				icon={icon}
 				onClick={action}
 			/>
