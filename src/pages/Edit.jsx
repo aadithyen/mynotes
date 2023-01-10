@@ -52,8 +52,8 @@ const Edit = () => {
 				duration: 3000,
 				isClosable: true,
 			});
+			nav("/");
 		}
-		nav("/");
 	};
 
 	const deleteNote = async () => {
