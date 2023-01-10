@@ -16,7 +16,6 @@ const getNotes = async (uid) => {
 		return docSnap.data().notes;
 	} else {
 		await setDoc(doc(db, "book", uid), { notes: [] });
-		console.log("New User!");
 	}
 };
 
