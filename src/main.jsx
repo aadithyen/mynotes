@@ -39,7 +39,7 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<ColorModeScript initialColorMode={thisTheme.config.initialColorMode} />
+		<ColorModeScript type="localStorage" initialColorMode="system" />
 		<ChakraProvider theme={thisTheme}>
 			<AuthContextProvider>
 				<QueryClientProvider client={queryClient}>

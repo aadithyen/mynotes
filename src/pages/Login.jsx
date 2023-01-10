@@ -4,18 +4,37 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../AuthContext";
 import gdscLogo from "../assets/gdsc logo.webp";
 import { useQuery } from "react-query";
+import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
+import { useEffect, useState } from "react";
 
 const Login = () => {
 	const navigate = useNavigate();
-	const { googleSignIn } = UserAuth();
+	const { googleSignIn, user } = UserAuth();
+	const [spinner, setSpinner] = useState(true);
+
+	useQuery("redirect", () => {
+		onAuthStateChanged(auth, () => {
+			setSpinner(false);
+		});
+	});
 
 	const login = useQuery("notes", googleSignIn, {
 		enabled: false,
 		refetchOnWindowFocus: false,
-		onSuccess: () => {
-			navigate("/");
-		},
 	});
+
+	const redirectStatus = useQuery(["spinner", auth], () => {
+		return getRedirectResult(auth);
+	});
+
+	if (redirectStatus.isSuccess) {
+		console.log(redirectStatus.data);
+	}
+
+	if (login.isSuccess || user) {
+		navigate("/");
+	}
 
 	return (
 		<Box maxW="1000px" mx="auto" px="2">
@@ -33,7 +52,7 @@ const Login = () => {
 
 					<Button
 						leftIcon={<FaGoogle />}
-						isLoading={login.isFetching}
+						isLoading={spinner || login.isFetching}
 						mt="12"
 						onClick={login.refetch}
 					>
