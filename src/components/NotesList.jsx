@@ -6,7 +6,7 @@ const NotesList = ({ notes, searchTerm }) => {
 	const newNotes =
 		searchTerm != ""
 			? notes.filter((note) => {
-					return note.title.includes(searchTerm);
+					return note.title.toLowerCase().match(searchTerm.toLowerCase());
 			  })
 			: notes;
 
