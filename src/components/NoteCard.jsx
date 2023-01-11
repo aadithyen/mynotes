@@ -7,7 +7,7 @@ const NoteCard = ({ heading, body }) => {
 				<Heading size="md" pr={12} mb={3} fontWeight="semibold">
 					{heading}
 				</Heading>
-				<Text>{body.length > 120 ? body.substring(0, 120) : body}</Text>
+				<Text>{body?.length > 120 ? body.substring(0, 120) : body}</Text>
 			</CardBody>
 		</Card>
 	);

@@ -7,8 +7,8 @@ import NotesList from "../components/NotesList";
 import { db } from "../firebase";
 import { UserAuth } from "../AuthContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useState } from "react";
+import { useQuery } from "react-query";
 
 const getNotes = async (uid) => {
 	const docRef = doc(db, "book", uid);
@@ -27,12 +27,12 @@ const Home = () => {
 
 	const notes = useQuery(["notes", user.uid], () => getNotes(user.uid));
 
-	if (notes.isLoading) {
-		return <span>Loading...</span>;
-	}
-
 	if (notes.isError) {
 		return <span>Error: {notes.error.message}</span>;
+	}
+
+	if (notes.isSuccess) {
+		localStorage.setItem("num-notes", notes.data.length);
 	}
 
 	const handleSearchChange = (event) => {
@@ -42,7 +42,12 @@ const Home = () => {
 	return (
 		<Box maxW="1000px" mx="auto" px="2">
 			<Header searchHandler={handleSearchChange} />
-			<NotesList notes={notes.data} searchTerm={search} />
+			<NotesList
+				notes={notes.data}
+				searchTerm={search}
+				isLoading={notes.isLoading}
+				numCards={localStorage.getItem("num-notes")}
+			/>
 			<Link to="/edit" state={{ scratch: true }}>
 				<FAB icon={<MdAdd />} />
 			</Link>

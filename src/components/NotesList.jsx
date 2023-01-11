@@ -1,8 +1,27 @@
-import { Box, Flex, Heading, Text, Link } from "@chakra-ui/react";
+import { Flex, Heading, Text, Link, Skeleton } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import NoteCard from "./NoteCard";
 
-const NotesList = ({ notes, searchTerm }) => {
+const NotesList = ({ notes, searchTerm, isLoading, numCards }) => {
+	if (isLoading) {
+		return (
+			<Flex flexDir="column" px="4" gap="2px">
+				{Array.from(Array(parseInt(numCards))).map(() => {
+					return (
+						<NoteCard
+							heading={<Skeleton>i</Skeleton>}
+							body={
+								<Skeleton>
+									i<br />i
+								</Skeleton>
+							}
+						/>
+					);
+				})}
+			</Flex>
+		);
+	}
+
 	const newNotes =
 		searchTerm != ""
 			? notes.filter((note) => {
