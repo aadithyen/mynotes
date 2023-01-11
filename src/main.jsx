@@ -38,6 +38,10 @@ const router = createBrowserRouter([
 	},
 ]);
 
+if (!localStorage.hasOwnProperty("num-notes")) {
+	localStorage.setItem("num-notes", 0);
+}
+
 if (
 	localStorage.getItem("chakra-ui-color-mode") == "light" &&
 	window.matchMedia("(prefers-color-scheme: dark)").matches
