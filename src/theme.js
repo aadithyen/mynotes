@@ -1,7 +1,6 @@
 import {
 	extendTheme,
 	withDefaultColorScheme,
-	withDefaultProps,
 	withDefaultVariant,
 } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
@@ -11,12 +10,10 @@ const config = {
 		heading: `'Space Grotesk', sans-serif`,
 		body: `'Space Grotesk', sans-serif`,
 	},
-	styles: {
-		global: (props) => ({
-			body: {
-				bg: mode("#fafafa", "#11151c")(props),
-			},
-		}),
+	semanticTokens: {
+		colors: {
+			"chakra-body-bg": { _light: "#fafafa", _dark: "#11151c" },
+		},
 	},
 	components: {
 		Input: {

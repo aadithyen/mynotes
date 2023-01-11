@@ -94,7 +94,7 @@ const Edit = () => {
 	const handleUpload = (file) => {};
 
 	return (
-		<Box maxW="1000px" my="4" mx="auto" px="4" mt="8">
+		<Box maxW="1000px" mx="auto" px="4" mt="12" mx="3">
 			<Flex flexDir="column">
 				<Flex flexDir="row" justifyContent="space-between">
 					<Link to="/">
@@ -127,7 +127,8 @@ const Edit = () => {
 				></Textarea>
 
 				<Textarea
-					minH="xl"
+					minH="60vh"
+					w="100%"
 					placeholder="Write here"
 					border="none"
 					resize="none"

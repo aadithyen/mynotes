@@ -7,6 +7,7 @@ const FAB = ({ icon, action }) => {
 				aria-label="add note"
 				height="60px"
 				width="60px"
+				bg="var(--chakra-colors-chakra-body-bg)"
 				fontSize="25px"
 				icon={icon}
 				onClick={action}
