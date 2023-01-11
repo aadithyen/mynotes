@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { FaGoogle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserAuth } from "../AuthContext";
 import gdscLogo from "../assets/gdsc logo.webp";
 import { useQuery } from "react-query";
@@ -25,7 +25,7 @@ const Login = () => {
 	});
 
 	if (login.isSuccess || user) {
-		navigate("/");
+		return <Navigate to="/" />;
 	}
 
 	return (

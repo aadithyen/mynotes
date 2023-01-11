@@ -134,8 +134,7 @@ const Edit = () => {
 					ref={bodyRef}
 					defaultValue={data.body}
 				></Textarea>
-
-				<FAB icon={<FaSave />} action={updateNote} />
+				<FAB icon={<FaSave />} action={updateNote} zIndex={4} />
 			</Flex>
 		</Box>
 	);
