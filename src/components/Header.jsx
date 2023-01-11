@@ -22,7 +22,6 @@ const Header = ({ searchHandler }) => {
 	const { user } = UserAuth();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const cancelRef = useRef();
-
 	const { logOut } = UserAuth();
 
 	return (
@@ -65,7 +64,12 @@ const Header = ({ searchHandler }) => {
 				<Heading as="h1" size="2xl">
 					my notes
 				</Heading>
-				<Avatar size="md" src={user?.photoURL} onClick={onOpen}></Avatar>
+				<Avatar
+					size="md"
+					src={user.photoURL}
+					referrerPolicy="no-referrer"
+					onClick={onOpen}
+				></Avatar>
 			</Flex>
 			<InputGroup mt="8">
 				<InputLeftElement pointerEvents="none" children={<MdSearch />} />
