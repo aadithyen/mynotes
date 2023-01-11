@@ -37,6 +37,14 @@ const router = createBrowserRouter([
 		element: <Login />,
 	},
 ]);
+
+if (
+	localStorage.getItem("chakra-ui-color-mode") == "light" &&
+	window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+	localStorage.removeItem("chakra-ui-color-mode");
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<ColorModeScript type="localStorage" initialColorMode="system" />
