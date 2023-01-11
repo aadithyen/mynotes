@@ -94,7 +94,7 @@ const Edit = () => {
 	const handleUpload = (file) => {};
 
 	return (
-		<Box maxW="1000px" mx="auto" px="4" mt="12" mx="3">
+		<Box maxW="1000px" px="4" mt="12" mx="3">
 			<Flex flexDir="column">
 				<Flex flexDir="row" justifyContent="space-between">
 					<Link to="/">
