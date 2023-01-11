@@ -24,14 +24,6 @@ const Login = () => {
 		refetchOnWindowFocus: false,
 	});
 
-	const redirectStatus = useQuery(["spinner", auth], () => {
-		return getRedirectResult(auth);
-	});
-
-	if (redirectStatus.isSuccess) {
-		console.log(redirectStatus.data);
-	}
-
 	if (login.isSuccess || user) {
 		navigate("/");
 	}
