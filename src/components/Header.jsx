@@ -28,7 +28,6 @@ const Header = ({ searchHandler }) => {
 		<Flex m="4" mt="12" flexDir="column">
 			<AlertDialog
 				isOpen={isOpen}
-				motionPreset="slideInBottom"
 				isCentered
 				leastDestructiveRef={cancelRef}
 				onClose={onClose}

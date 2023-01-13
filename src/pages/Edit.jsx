@@ -96,7 +96,7 @@ const Edit = () => {
 	return (
 		<Box maxW="1000px" px="4" mt="12" mx="auto">
 			<Flex flexDir="column" mx={3}>
-				<Flex flexDir="row" justifyContent="space-between">
+				<Flex position="sticky" flexDir="row" justifyContent="space-between">
 					<Link to="/">
 						<IconButton icon={<MdArrowBack />}></IconButton>
 					</Link>
